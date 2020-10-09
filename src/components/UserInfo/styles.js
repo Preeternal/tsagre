@@ -8,11 +8,6 @@ export const Container = styled.TouchableOpacity`
   padding-bottom: 32px;
 `;
 
-export const CompanyLogo = styled.Image`
-  width: 60px;
-  height: 60px;
-`;
-
 export const Description = styled.View`
   padding-left: 10px;
   flex: 1;
