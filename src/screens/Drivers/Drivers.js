@@ -6,7 +6,6 @@ import {
 } from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
-import {fetchDriverStandings, fetchDrivers} from '../../api';
 import {getDrivers, getStandings} from '../../state/thunks';
 
 // import {
@@ -38,7 +37,7 @@ import {getDrivers, getStandings} from '../../state/thunks';
 const Drivers = () => {
   useEffect(() => {
     getDrivers();
-    getStandings('alonso');
+    getStandings('abate');
   }, []);
 
   // const vacancies = useSelector(getVacancies);
@@ -64,7 +63,7 @@ const Drivers = () => {
         ListFooterComponent={View}
         ListFooterComponentStyle={styles.footer}
       />
-      <Button onPress={onPress} /> */}
+      */}
     </>
   );
 };
