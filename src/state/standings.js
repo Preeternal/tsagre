@@ -18,7 +18,6 @@ const INITIAL_STATE = {};
 export default (state = INITIAL_STATE, action: ACTION) => {
   switch (action.type) {
     case STANDING_SET:
-      console.log('ACTION PAYLOAD', action.payload);
       return {
         ...state,
         [action.payload.driverId]: action.payload,

@@ -27,7 +27,6 @@ export const getDrivers = async (offset) => {
 export const getStandings = async (id) => {
   try {
     const data = await fetchDriverStandings(id);
-    console.log('DATA', data);
     if (data.success) {
       store.dispatch(standingSet(data.payload));
     } else {

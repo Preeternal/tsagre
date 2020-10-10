@@ -18,7 +18,6 @@ export const fetchDrivers = async (offset = 0) => {
       response.status === 200 &&
       response.data?.MRData?.DriverTable?.Drivers
     ) {
-      console.log('response', response);
       return {
         success: true,
         payload: response.data?.MRData?.DriverTable?.Drivers,
@@ -46,7 +45,6 @@ export const fetchDriverStandings = async (id) => {
       url: `${url}/drivers/${id}/driverStandings.json`,
     });
     if (response.status === 200 && response.data?.MRData?.StandingsTable) {
-      console.log('StandingsTable', response.data?.MRData?.StandingsTable);
       return {
         success: true,
         payload: response.data?.MRData?.StandingsTable,
