@@ -5,7 +5,8 @@ import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import screens from './screens';
-import {Drivers} from '../screens';
+import {Drivers, Driver} from '../screens';
+
 import {HeaderCenter} from './styles';
 
 enableScreens();
@@ -29,6 +30,34 @@ const Navigation = () => {
               headerCenter: () => <HeaderCenter>ergast</HeaderCenter>,
             },
           }),
+          headerHideShadow: true,
+          contentStyle,
+        })}
+      />
+      <Stack.Screen
+        name={screens.Driver}
+        component={Driver}
+        options={(options) => ({
+          ...Platform.select({
+            ios: {
+              title: 'Driver',
+              headerTitleStyle: headerCenter,
+              headerTintColor: 'black',
+              headerBackTitle: 'Назад',
+              headerBackTitleStyle: headerBack,
+            },
+            android: {
+              headerCenter: () => <HeaderCenter>Отклики</HeaderCenter>,
+              headerTintColor: 'black',
+              // headerLeft: () => (
+              //   <Left onPress={options.navigation.goBack}>
+              //     <Image source={images.arrowLeft} />
+              //     <HeaderLeftText>Назад</HeaderLeftText>
+              //   </Left>
+              // ),
+            },
+          }),
+
           headerHideShadow: true,
           contentStyle,
         })}

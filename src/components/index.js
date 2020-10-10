@@ -1,2 +1,2 @@
-export * from './UserCard/UserCard';
-export * from './UserInfo/UserInfo';
+export * from './DriverCard';
+export * from './DriverInfo';

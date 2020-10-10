@@ -1,6 +1,7 @@
 // SELECTORS
-export const getStandings = (state) => state.responses;
-export const getStandingById = (id) => (state) => getStandings(state)[id];
+export const getStandingsSelector = (state) => state.responses;
+export const getStandingById = (id) => (state) =>
+  getStandingsSelector(state)[id];
 
 // ACTION TYPES
 const STANDING_SET = 'STANDING_SET';

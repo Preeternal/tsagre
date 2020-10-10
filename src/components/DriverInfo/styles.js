@@ -13,7 +13,7 @@ export const Description = styled.View`
   flex: 1;
 `;
 
-export const VacancyName = styled.Text`
+export const DriverId = styled.Text`
   font-style: normal;
   font-weight: bold;
   font-size: 12px;
@@ -22,8 +22,7 @@ export const VacancyName = styled.Text`
   margin-bottom: 2px;
 `;
 
-export const VacancySalary = styled.Text`
-  font-family: Roboto-Bold;
+export const DriverName = styled.Text`
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -32,8 +31,7 @@ export const VacancySalary = styled.Text`
   margin-bottom: 3px;
 `;
 
-export const VacancyHirer = styled.Text`
-  font-family: Roboto-Medium;
+export const DriverNationality = styled.Text`
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -45,23 +43,12 @@ export const Statistics = styled.View`
   align-items: flex-end;
 `;
 
-export const NumberContainer = styled.View`
+export const WikiContainer = styled.View`
   flex-direction: row;
   align-items: center;
 `;
 
-export const VacancyNumber = styled.Text`
-  font-style: normal;
-  font-weight: 900;
-  font-size: 23px;
-  line-height: 32.34px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: black;
-`;
-
-export const PlusNumberWrapper = styled.View`
+export const WikiWrapper = styled.TouchableOpacity`
   width: 42.76px;
   height: 25px;
   background: blue;
@@ -69,7 +56,7 @@ export const PlusNumberWrapper = styled.View`
   justify-content: center;
 `;
 
-export const PlusNumber = styled.Text`
+export const Wiki = styled.Text`
   font-style: normal;
   font-weight: 900;
   font-size: 15px;
@@ -86,7 +73,7 @@ export const ViewsContainer = styled.View`
   align-items: center;
 `;
 
-export const VacancyViews = styled.Text`
+export const Birth = styled.Text`
   font-style: normal;
   font-weight: bold;
   font-size: 10px;
