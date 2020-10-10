@@ -1,13 +1,6 @@
 import styled from 'styled-components/native';
 
-type Props = {
-  type?: 'blue' | 'disabled' | 'bordered',
-};
-
-export const Button =
-  styled.TouchableOpacity <
-  Props >
-  `
+export const Button = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   background-color: ${({type}) =>
@@ -15,6 +8,5 @@ export const Button =
     (type === 'blue' && 'blue') ||
     'transparent'};
   border-radius: ${({type}) => (type ? '10px' : 0)};
-  border: ${({type}) => (type === 'bordered' ? '1px' : 0)} solid
-    gray;
+  border: ${({type}) => (type === 'bordered' ? '1px' : 0)} solid gray;
 `;

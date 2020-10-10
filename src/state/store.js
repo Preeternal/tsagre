@@ -10,7 +10,7 @@ const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   // whitelist: ['drivers', 'standings'],
-  // blacklist: ['drivers'],
+  blacklist: ['drivers', 'quantity'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

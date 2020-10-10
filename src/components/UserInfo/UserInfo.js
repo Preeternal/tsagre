@@ -18,16 +18,16 @@ import {
   VacancyViews,
 } from './styles';
 
-export const UserInfo = ({driver, disabled, onPress}) => {
+export const UserInfo = ({driver, disabled = true, onPress = () => {}}) => {
   // const company = useSelector(getCompanyById(vacancy.company));
-  // return company ? (
-  <Container
-    onPress={onPress}
-    // disabled={disabled ? true : false}
-  >
-    <Description>
-      <VacancyName>{`${driver.givenName} ${driver.familyName}`}</VacancyName>
-      {/* <VacancySalary>
+  return (
+    <Container
+      onPress={onPress}
+      // disabled={disabled ? true : false}
+    >
+      <Description>
+        <VacancyName>{`${driver?.givenName} ${driver?.familyName}`}</VacancyName>
+        {/* <VacancySalary>
         {vacancy?.salary?.length === 2
           ? `${vacancy?.salary[0].toLocaleString('ru-RU')} - ${
               vacancy?.salary[1] && vacancy?.salary[1].toLocaleString('ru-RU')
@@ -38,8 +38,8 @@ export const UserInfo = ({driver, disabled, onPress}) => {
             } руб.` || ''}
       </VacancySalary>
       <VacancyHirer>{company.name}</VacancyHirer> */}
-    </Description>
-    {/* <Statistics>
+      </Description>
+      {/* <Statistics>
       <NumberContainer>
         <VacancyNumber>{vacancy?.number || ''}</VacancyNumber>
         {vacancy.plusNumber && (
@@ -55,8 +55,9 @@ export const UserInfo = ({driver, disabled, onPress}) => {
         <VacancyViews>{daysString}</VacancyViews>
       </ViewsContainer>
     </Statistics> */}
-  </Container>;
-  // ) : (
+    </Container>
+  );
+  // : (
   //   <></>
   // );
 };

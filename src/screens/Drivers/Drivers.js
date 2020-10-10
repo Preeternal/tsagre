@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {FlatList, StyleSheet, Alert, View, Text} from 'react-native';
 import {
   useSelector,
@@ -7,6 +7,8 @@ import {
 import {useNavigation} from '@react-navigation/native';
 
 import {getDrivers, getStandings} from '../../state/thunks';
+import {getDriversSelector} from '../../state/drivers';
+import {UserCard} from '../../components';
 
 // import {
 //   fetchMyUser,
@@ -20,11 +22,8 @@ import {getDrivers, getStandings} from '../../state/thunks';
 // // import { responseViewed, getResponses } from '../../state/responses';
 // import { VacancyCard } from '../../components';
 // import { FooterButton, ButtonText } from './styles';
-// import { Vacancy } from 'Interfaces';
 
-// const renderVacancyCard = ({ item }) => (
-//   <VacancyCard vacancy={item} />
-// );
+const renderDriverCard = ({item}) => <UserCard driver={item} />;
 
 // const Button = ({ onPress }) => {
 //   return (
@@ -40,7 +39,10 @@ const Drivers = () => {
     getStandings('abate');
   }, []);
 
-  // const vacancies = useSelector(getVacancies);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const drivers = useSelector(getDriversSelector);
+
   // const navigation = useNavigation();
 
   // const onPress = useCallback(() => {
@@ -52,18 +54,25 @@ const Drivers = () => {
   //   }
   // }, [navigation]);
 
+  const loadMoreDrivers = useCallback(() => {
+    getDrivers(currentPage * 20);
+    setCurrentPage(currentPage + 1);
+  }, [currentPage]);
+
+  console.log('page', currentPage);
+  console.log('drivers count', Object.values(drivers).length);
+
   return (
     <>
-      <Text>Hi</Text>
-      {/* <FlatList
-        data={Object.values(vacancies)}
-        renderItem={renderVacancyCard}
+      <FlatList
+        data={Object.values(drivers)}
+        renderItem={renderDriverCard}
         contentContainerStyle={styles.container}
-        keyExtractor={(item, index) => item.id.toString() + index}
+        keyExtractor={(item, index) => item.driverId.toString() + index}
         ListFooterComponent={View}
         ListFooterComponentStyle={styles.footer}
+        onEndReached={loadMoreDrivers}
       />
-      */}
     </>
   );
 };
@@ -75,6 +84,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   footer: {
-    height: 130,
+    height: 10,
   },
 });

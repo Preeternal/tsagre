@@ -5,7 +5,7 @@ const url = 'http://ergast.com/api/f1';
 const errorText = 'Something went wrong, please try again later';
 
 export const fetchDrivers = async (offset = 0) => {
-  const limit = 10;
+  const limit = 20;
   try {
     const response = await axios({
       method: 'post',
@@ -18,10 +18,11 @@ export const fetchDrivers = async (offset = 0) => {
       response.status === 200 &&
       response.data?.MRData?.DriverTable?.Drivers
     ) {
-      console.log('drivers', response.data?.MRData?.DriverTable?.Drivers);
+      console.log('response', response);
       return {
         success: true,
         payload: response.data?.MRData?.DriverTable?.Drivers,
+        quantity: response.data?.MRData?.total,
         error: null,
       };
     } else {

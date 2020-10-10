@@ -2,7 +2,7 @@
 import React, {useState, useCallback} from 'react';
 // import {useNavigation} from '@react-navigation/native';
 import {Card} from '../common';
-import {} from '../';
+import {UserInfo} from '../UserInfo/UserInfo';
 
 // import {
 //   ButtonsContainer,
@@ -20,14 +20,14 @@ const UserCard = ({driver}) => {
 
   return (
     <Card>
-      {/* <VacancyDescription
-        onPress={() =>
-          navigation.navigate('Responses', {
-            driver,
-          })
-        }
-        vacancy={driver}
-      /> */}
+      <UserInfo
+        // onPress={() =>
+        //   navigation.navigate('Responses', {
+        //     driver,
+        //   })
+        // }
+        driver={driver}
+      />
     </Card>
   );
 };

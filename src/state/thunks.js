@@ -1,14 +1,21 @@
 import {store} from './store';
 import {fetchDrivers, fetchDriverStandings} from '../api';
 import {driversSet} from './drivers';
+import {quantitySet, getQuantity} from './quantity';
+
 import {standingSet} from './standings';
 
 // DRIVERS THUNK
 export const getDrivers = async (offset) => {
+  const quantity = getQuantity(store.getState());
+  console.log('quantity', quantity);
   try {
     const data = await fetchDrivers(offset);
     if (data.success) {
       store.dispatch(driversSet(data.payload));
+      if (!quantity) {
+        store.dispatch(quantitySet(data.quantity));
+      }
     } else {
       return Promise.reject(new Error(data.error));
     }
