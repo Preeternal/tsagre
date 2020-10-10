@@ -7,13 +7,12 @@ import {standingSet} from './standings';
 
 // DRIVERS THUNK
 export const getDrivers = async (offset) => {
-  const quantity = getQuantity(store.getState());
-  console.log('quantity', quantity);
+  const driversQuantity = getQuantity(store.getState());
   try {
     const data = await fetchDrivers(offset);
     if (data.success) {
       store.dispatch(driversSet(data.payload));
-      if (!quantity) {
+      if (!driversQuantity) {
         store.dispatch(quantitySet(data.quantity));
       }
     } else {
