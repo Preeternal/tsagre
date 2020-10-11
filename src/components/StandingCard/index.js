@@ -19,9 +19,11 @@ export const StandingCard = ({standing}) => {
         <Season>{`season: ${standing.season || ''}`}</Season>
         <Round>{`round: ${standing.round || ''}`}</Round>
       </SeasonContainer>
-      {driverStandings && <DriverStandings>Driver standings:</DriverStandings>}
+      {driverStandings.length && (
+        <DriverStandings>Driver standings:</DriverStandings>
+      )}
 
-      {driverStandings &&
+      {driverStandings.length &&
         driverStandings.map((item, index) => (
           <Fragment key={index}>
             <StandingsInfo>
@@ -34,7 +36,7 @@ export const StandingCard = ({standing}) => {
                 {item.Constructors.length > 1 ? 'Constructors' : 'Constructor'}
               </DriverStandings>
             )}
-            {item.Constructors &&
+            {item.Constructors.length &&
               item.Constructors.map((itm, ind) => (
                 <Card key={ind}>
                   <DriverInfo
