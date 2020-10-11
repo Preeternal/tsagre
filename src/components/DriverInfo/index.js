@@ -36,9 +36,11 @@ export const DriverInfo = ({driver, disabled = true, onPress}) => {
             <Wiki>wiki</Wiki>
           </WikiWrapper>
         </WikiContainer>
-        <ViewsContainer>
-          <Birth>birth</Birth>
-        </ViewsContainer>
+        {driver?.dateOfBirth && (
+          <ViewsContainer>
+            <Birth>birth</Birth>
+          </ViewsContainer>
+        )}
         <ViewsContainer>
           <Birth>{driver?.dateOfBirth || ''}</Birth>
         </ViewsContainer>

@@ -8,7 +8,7 @@ export const fetchDrivers = async (offset = 0) => {
   const limit = 20;
   try {
     const response = await axios({
-      method: 'post',
+      method: 'get',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -38,7 +38,7 @@ export const fetchDrivers = async (offset = 0) => {
 export const fetchDriverStandings = async (id) => {
   try {
     const response = await axios({
-      method: 'post',
+      method: 'get',
       headers: {
         'Content-Type': 'application/json',
       },

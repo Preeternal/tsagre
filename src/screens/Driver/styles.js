@@ -19,5 +19,5 @@ export const FooterButton = styled(Button)`
   box-shadow: 0px 2px 5px gray;
   elevation: 2;
   position: absolute;
-  bottom: 20px;
+  bottom: 25px;
 `;

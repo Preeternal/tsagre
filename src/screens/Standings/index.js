@@ -1,34 +1,39 @@
-import React, {useEffect, useCallback} from 'react';
+import React from 'react';
+import {useSelector} from 'react-redux';
+import {StyleSheet, FlatList, View} from 'react-native';
 
-import {getStandings} from '../../state/thunks';
-import {Card} from '../../components/common';
-import {DriverInfo} from '../../components';
-import {FooterButton, ButtonText} from './styles';
+import {getStandingById} from '../../state/standings';
+import {StandingCard} from '../../components';
+import {Loader} from '../../components/common';
 
-const Standings = ({route}) => {
-  const {driver} = route.params;
-  useEffect(() => {
-    if (driver?.driverId) {
-      getStandings(driver?.driverId);
-    }
-  }, [driver]);
+const renderStandingCard = ({item}) => <StandingCard standing={item} />;
 
+export const Standings = ({route}) => {
+  const {driverId} = route.params.driver;
+  const standings = useSelector(getStandingById(driverId));
   return (
     <>
-  {/* {typeof drivers === 'object' ? ( */}
+      {standings?.StandingsLists?.length ? (
         <FlatList
-          data={Object.values(drivers)}
-          renderItem={renderDriverCard}
+          data={standings?.StandingsLists}
+          renderItem={renderStandingCard}
           contentContainerStyle={styles.container}
-          keyExtractor={(item, index) => item.driverId.toString() + index}
+          keyExtractor={(item, index) => driverId + index}
           ListFooterComponent={View}
           ListFooterComponentStyle={styles.footer}
-          onEndReached={loadMoreDrivers}
         />
-      {/* ) : (
+      ) : (
         <Loader />
-      )} */}
+      )}
+    </>
   );
 };
 
-export {Standings};
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+  },
+  footer: {
+    height: 10,
+  },
+});

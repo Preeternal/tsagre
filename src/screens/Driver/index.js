@@ -1,4 +1,5 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import {getStandings} from '../../state/thunks';
 import {Card} from '../../components/common';
@@ -7,6 +8,8 @@ import {FooterButton, ButtonText} from './styles';
 
 const Driver = ({route}) => {
   const {driver} = route.params;
+  const navigation = useNavigation();
+
   useEffect(() => {
     if (driver?.driverId) {
       getStandings(driver?.driverId);
@@ -18,7 +21,13 @@ const Driver = ({route}) => {
       <Card>
         <DriverInfo driver={driver} disabled={false} />
       </Card>
-      <FooterButton type="blue" onPress={() => {}}>
+      <FooterButton
+        type="blue"
+        onPress={() =>
+          navigation.navigate('Standings', {
+            driver,
+          })
+        }>
         <ButtonText>Таблица заездов</ButtonText>
       </FooterButton>
     </>

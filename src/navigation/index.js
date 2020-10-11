@@ -2,10 +2,9 @@ import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {enableScreens} from 'react-native-screens';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import {StackNavigationProp} from '@react-navigation/stack';
 
 import screens from './screens';
-import {Drivers, Driver} from '../screens';
+import {Drivers, Driver, Standings} from '../screens';
 
 import {HeaderCenter} from './styles';
 
@@ -47,17 +46,31 @@ const Navigation = () => {
               headerBackTitleStyle: headerBack,
             },
             android: {
-              headerCenter: () => <HeaderCenter>Отклики</HeaderCenter>,
+              headerCenter: () => <HeaderCenter>Driver</HeaderCenter>,
               headerTintColor: 'black',
-              // headerLeft: () => (
-              //   <Left onPress={options.navigation.goBack}>
-              //     <Image source={images.arrowLeft} />
-              //     <HeaderLeftText>Назад</HeaderLeftText>
-              //   </Left>
-              // ),
             },
           }),
-
+          headerHideShadow: true,
+          contentStyle,
+        })}
+      />
+      <Stack.Screen
+        name={screens.Standings}
+        component={Standings}
+        options={(options) => ({
+          ...Platform.select({
+            ios: {
+              title: 'Таблица заездов',
+              headerTitleStyle: headerCenter,
+              headerTintColor: 'black',
+              headerBackTitle: 'Назад',
+              headerBackTitleStyle: headerBack,
+            },
+            android: {
+              headerCenter: () => <HeaderCenter>Таблица заездов</HeaderCenter>,
+              headerTintColor: 'black',
+            },
+          }),
           headerHideShadow: true,
           contentStyle,
         })}

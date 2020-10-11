@@ -1,5 +1,5 @@
 // SELECTORS
-export const getStandingsSelector = (state) => state.responses;
+export const getStandingsSelector = (state) => state.standings;
 export const getStandingById = (id) => (state) =>
   getStandingsSelector(state)[id];
 

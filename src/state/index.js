@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import drivers from './drivers';
-import standigs from './standings';
+import standings from './standings';
 import quantity from './quantity';
 
 export const rootReducer = combineReducers({
   drivers,
-  standigs,
+  standings,
   quantity,
 });

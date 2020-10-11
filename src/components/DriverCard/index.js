@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Card} from '../common';
 import {DriverInfo} from '../DriverInfo';
