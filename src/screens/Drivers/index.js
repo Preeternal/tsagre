@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import {getDrivers, getStandings} from '../../state/thunks';
+import {getDrivers} from '../../state/thunks';
 import {getDriversSelector} from '../../state/drivers';
 import {getQuantity} from '../../state/quantity';
 import {DriverCard} from '../../components';
