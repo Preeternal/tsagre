@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import {
   SeasonContainer,
@@ -23,7 +23,7 @@ export const StandingCard = ({standing}) => {
 
       {driverStandings &&
         driverStandings.map((item, index) => (
-          <>
+          <Fragment key={index}>
             <StandingsInfo>
               <Info>{`position: ${item.position}`}</Info>
               <Info>{`points: ${item.points}`}</Info>
@@ -47,7 +47,7 @@ export const StandingCard = ({standing}) => {
                   />
                 </Card>
               ))}
-          </>
+          </Fragment>
         ))}
     </>
   );
