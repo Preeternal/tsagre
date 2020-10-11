@@ -13,13 +13,24 @@ const renderDriverCard = ({item}) => <DriverCard driver={item} />;
 const Drivers = () => {
   useEffect(() => {
     getDrivers();
-  }, []);
-
-  const [currentPage, setCurrentPage] = useState(1);
+    reloadPersistedDrivers();
+  }, [reloadPersistedDrivers]);
 
   const drivers = useSelector(getDriversSelector);
 
+  const [currentPage, setCurrentPage] = useState(
+    Object.values(drivers)?.length
+      ? parseInt(Object.values(drivers)?.length / 20, 10)
+      : 1,
+  );
+
   const driversQuantity = useSelector(getQuantity);
+
+  const reloadPersistedDrivers = useCallback(() => {
+    if (typeof drivers === 'object') {
+      getDrivers(0, Object.values(drivers).length);
+    }
+  }, [drivers]);
 
   const loadMoreDrivers = useCallback(() => {
     if (driversQuantity > currentPage * 20) {
@@ -27,6 +38,8 @@ const Drivers = () => {
       setCurrentPage(currentPage + 1);
     }
   }, [currentPage, driversQuantity]);
+
+  console.log(currentPage, Object.values(drivers).length);
 
   return (
     <>

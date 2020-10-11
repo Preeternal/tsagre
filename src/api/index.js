@@ -4,8 +4,7 @@ import {Alert} from 'react-native';
 const url = 'http://ergast.com/api/f1';
 const errorText = 'Something went wrong, please try again later';
 
-export const fetchDrivers = async (offset = 0) => {
-  const limit = 20;
+export const fetchDrivers = async (offset = 0, limit = 20) => {
   try {
     const response = await axios({
       method: 'get',
