@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {Alert} from 'react-native';
+// import {gql} from '@apollo/client';
 
 const url = 'http://ergast.com/api/f1';
 const errorText = 'Something went wrong, please try again later';
