@@ -1,7 +1,9 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {RestLink} from 'apollo-link-rest';
 
-const restLink = new RestLink({uri: 'http://ergast.com/api/f1'});
+import {apiUrl} from '../config';
+
+const restLink = new RestLink({uri: apiUrl});
 
 export const client = new ApolloClient({
   cache: new InMemoryCache(),

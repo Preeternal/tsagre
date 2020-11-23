@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {Alert} from 'react-native';
-// import {gql} from '@apollo/client';
+import {gql} from '@apollo/client';
 
-const url = 'http://ergast.com/api/f1';
+import {apiUrl} from '../config';
+
 const errorText = 'Something went wrong, please try again later';
 
 export const fetchDrivers = async (offset = 0, limit = 20) => {
@@ -12,7 +13,7 @@ export const fetchDrivers = async (offset = 0, limit = 20) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      url: `${url}/drivers.json?limit=${limit}&offset=${offset}`,
+      url: `${apiUrl}drivers.json?limit=${limit}&offset=${offset}`,
     });
     if (
       response.status === 200 &&
@@ -35,6 +36,16 @@ export const fetchDrivers = async (offset = 0, limit = 20) => {
   }
 };
 
+// const Drivers = (limit, offset) => gql`
+//   query Drivers {
+//     person(limit, offset) @rest(type: "Drivers", path: "drivers.json?limit=${limit}&offset=${offset}") {
+//       name
+//     }
+//   }
+// `;
+
+// console.log('drivers', Drivers(10, 0));
+
 export const fetchDriverStandings = async (id) => {
   try {
     const response = await axios({
@@ -42,7 +53,7 @@ export const fetchDriverStandings = async (id) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      url: `${url}/drivers/${id}/driverStandings.json`,
+      url: `${apiUrl}drivers/${id}/driverStandings.json`,
     });
     if (response.status === 200 && response.data?.MRData?.StandingsTable) {
       return {
