@@ -3,6 +3,7 @@ import {Alert} from 'react-native';
 import {gql} from '@apollo/client';
 
 import {apiUrl} from '../config';
+import {client} from './client';
 
 const errorText = 'Something went wrong, please try again later';
 
@@ -36,13 +37,17 @@ export const fetchDrivers = async (offset = 0, limit = 20) => {
   }
 };
 
-// const Drivers = (limit, offset) => gql`
-//   query Drivers {
-//     person(limit, offset) @rest(type: "Drivers", path: "drivers.json?limit=${limit}&offset=${offset}") {
-//       name
-//     }
-//   }
-// `;
+const Drivers = (limit, offset) => gql`
+  query Drivers {
+    person(limit, offset) @rest(type: "Drivers", path: "drivers.json?limit=${limit}&offset=${offset}") {
+      name
+    }
+  }
+`;
+
+// client.query({Drivers}).then((response) => {
+//   console.log(response);
+// });
 
 // console.log('drivers', Drivers(10, 0));
 
