@@ -47,12 +47,17 @@ export const fetchDrivers = async (offset = 0, limit = 20) => {
 // `;
 
 const query = gql`
-  query Drivers {
-    drivers @rest(type: "Drivers", path: "drivers.json") {
-      MRData
-      DriverTable @type(name: "User") {
-        Drivers
+  query GetDrivers {
+    drivers @rest(type: "drivers", path: "drivers.json") {
+      MRData {
+        total
+        limit
+        offset
+        DriverTable
       }
+      # users @type(name: "User") {
+      #   DriverTable
+      # }
     }
   }
 `;
