@@ -16,6 +16,7 @@ export const fetchDrivers = async (offset = 0, limit = 20) => {
       },
       url: `${apiUrl}drivers.json?limit=${limit}&offset=${offset}`,
     });
+    console.log('response', response);
     if (
       response.status === 200 &&
       response.data?.MRData?.DriverTable?.Drivers
@@ -37,17 +38,28 @@ export const fetchDrivers = async (offset = 0, limit = 20) => {
   }
 };
 
-const Drivers = (limit, offset) => gql`
+// const Drivers = (limit = 0, offset = 20) => gql`
+//   query Drivers {
+//     person(limit, offset) @rest(type: "Drivers", path: "drivers.json?limit=${limit}&offset=${offset}") {
+//       name
+//     }
+//   }
+// `;
+
+const query = gql`
   query Drivers {
-    person(limit, offset) @rest(type: "Drivers", path: "drivers.json?limit=${limit}&offset=${offset}") {
-      name
+    drivers @rest(type: "Drivers", path: "drivers.json") {
+      MRData
+      DriverTable @type(name: "User") {
+        Drivers
+      }
     }
   }
 `;
 
-// client.query({Drivers}).then((response) => {
-//   console.log(response);
-// });
+client.query({query}).then((response) => {
+  console.log('query', response);
+});
 
 // console.log('drivers', Drivers(10, 0));
 
