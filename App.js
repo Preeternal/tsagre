@@ -7,9 +7,10 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import Navigation from './src/navigation';
 
-// if (__DEV__)
-//   global.XMLHttpRequest =
-//     (global as any).originalXMLHttpRequest || global.XMLHttpRequest;
+if (__DEV__) {
+  global.XMLHttpRequest =
+    global.originalXMLHttpRequest || global.XMLHttpRequest;
+}
 
 const navigationTheme = {
   ...DefaultTheme,
