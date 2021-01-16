@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
+import {gql, useQuery} from '@apollo/client';
 
 import {getDrivers} from '../../state/thunks';
 import {getDriversSelector} from '../../state/drivers';
@@ -10,7 +11,43 @@ import {Loader} from '../../components/common';
 
 const renderDriverCard = ({item}) => <DriverCard driver={item} />;
 
+const GET_DRIVERS = gql`
+  query GetDrivers {
+    drivers @rest(type: "drivers", path: "drivers.json") {
+      MRData {
+        total
+        limit
+        offset
+        DriverTable
+      }
+      # users @type(name: "User") {
+      #   DriverTable
+      # }
+    }
+  }
+`;
+
 const Drivers = () => {
+  const {loading, error, data, previousData} = useQuery(GET_DRIVERS, {
+    variables: {language: 'english'},
+  });
+
+  if (loading) {
+    console.log('loading', loading);
+  }
+
+  if (error) {
+    console.log('error', error);
+  }
+
+  if (data) {
+    console.log('data', data);
+  }
+
+  if (previousData) {
+    console.log('previousData', previousData);
+  }
+
   useEffect(() => {
     getDrivers();
     reloadPersistedDrivers();
