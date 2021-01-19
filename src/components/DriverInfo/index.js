@@ -1,5 +1,8 @@
 import React, {useCallback} from 'react';
+import {useSelector} from 'react-redux';
 import {Linking} from 'react-native';
+
+import {getDriverById} from '../../state/drivers';
 
 import {
   Container,
@@ -15,20 +18,31 @@ import {
   Birth,
 } from './styles';
 
-export const DriverInfo = ({driver, disabled = true, onPress}) => {
+export const DriverInfo = ({
+  constructor,
+  driverId,
+  disabled = true,
+  onPress,
+}) => {
+  const driver = useSelector(getDriverById(driverId));
   const getWikiInfo = useCallback(() => {
     if (driver?.url) {
       Linking.openURL(driver?.url);
     }
-  }, [driver]);
+    if (constructor?.url) {
+      Linking.openURL(constructor?.url);
+    }
+  }, [driver, constructor]);
   return (
     <Container onPress={onPress} disabled={!disabled}>
       <Description>
-        <DriverId>{driver?.driverId || ''}</DriverId>
-        <DriverName>{`${driver?.givenName || ''} ${
+        <DriverId>{constructor.id || driverId || ''}</DriverId>
+        <DriverName>{`${constructor?.givenName || driver?.givenName || ''} ${
           driver?.familyName || ''
         }`}</DriverName>
-        <DriverNationality>{driver?.nationality || ''}</DriverNationality>
+        <DriverNationality>
+          {constructor?.nationality || driver?.nationality || ''}
+        </DriverNationality>
       </Description>
       <Statistics>
         <WikiContainer>

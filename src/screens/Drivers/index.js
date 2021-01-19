@@ -8,7 +8,7 @@ import {getQuantity} from '../../state/quantity';
 import {DriverCard} from '../../components';
 import {Loader} from '../../components/common';
 
-const renderDriverCard = ({item}) => <DriverCard driver={item} />;
+const renderDriverCard = ({item}) => <DriverCard driverId={item.driverId} />;
 
 const Drivers = () => {
   useEffect(() => {

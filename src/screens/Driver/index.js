@@ -7,25 +7,25 @@ import {DriverInfo} from '../../components';
 import {FooterButton, ButtonText} from './styles';
 
 const Driver = ({route}) => {
-  const {driver} = route.params;
+  const {driverId} = route.params;
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (driver?.driverId) {
-      getStandings(driver?.driverId);
+    if (driverId) {
+      getStandings(driverId);
     }
-  }, [driver]);
+  }, [driverId]);
 
   return (
     <>
       <Card>
-        <DriverInfo driver={driver} disabled={false} />
+        <DriverInfo driverId={driverId} disabled={false} />
       </Card>
       <FooterButton
         type="blue"
         onPress={() =>
           navigation.navigate('Standings', {
-            driver,
+            driverId,
           })
         }>
         <ButtonText>Таблица заездов</ButtonText>

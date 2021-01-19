@@ -40,10 +40,10 @@ export const StandingCard = ({standing}) => {
               item.Constructors.map((itm, ind) => (
                 <Card key={ind}>
                   <DriverInfo
-                    driver={{
+                    constructor={{
                       ...itm,
                       givenName: itm.name,
-                      driverId: itm.constructorId,
+                      id: itm.constructorId,
                     }}
                     disabled={false}
                   />

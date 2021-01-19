@@ -9,7 +9,7 @@ import {Loader} from '../../components/common';
 const renderStandingCard = ({item}) => <StandingCard standing={item} />;
 
 export const Standings = ({route}) => {
-  const {driverId} = route.params.driver;
+  const {driverId} = route.params;
   const standings = useSelector(getStandingById(driverId));
   return (
     <>

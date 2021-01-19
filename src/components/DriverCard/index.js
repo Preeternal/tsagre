@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Card} from '../common';
 import {DriverInfo} from '../DriverInfo';
 
-const DriverCard = ({driver}) => {
+const DriverCard = React.memo(({driverId}) => {
   const navigation = useNavigation();
 
   return (
@@ -11,13 +11,13 @@ const DriverCard = ({driver}) => {
       <DriverInfo
         onPress={() =>
           navigation.navigate('Driver', {
-            driver,
+            driverId,
           })
         }
-        driver={driver}
+        driverId={driverId}
       />
     </Card>
   );
-};
+});
 
 export {DriverCard};
