@@ -11,7 +11,7 @@ import mySaga from './sagas';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['quantity'],
+  blacklist: ['quantity', 'drivers'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

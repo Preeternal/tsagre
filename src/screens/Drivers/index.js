@@ -3,7 +3,7 @@ import {FlatList, StyleSheet, View} from 'react-native';
 import {useSelector} from 'react-redux';
 
 import {getDrivers} from '../../state/thunks';
-import {getDriversSelector} from '../../state/drivers';
+import {selectDrivers} from '../../state/drivers';
 import {getQuantity} from '../../state/quantity';
 import {DriverCard} from '../../components';
 import {Loader} from '../../components/common';
@@ -13,24 +13,17 @@ const renderDriverCard = ({item}) => <DriverCard driverId={item.driverId} />;
 const Drivers = () => {
   useEffect(() => {
     getDrivers();
-    reloadPersistedDrivers();
-  }, [reloadPersistedDrivers]);
+  }, []);
 
-  const drivers = useSelector(getDriversSelector);
+  const drivers = useSelector(selectDrivers);
 
   const [currentPage, setCurrentPage] = useState(
     Object.values(drivers)?.length
-      ? parseInt(Object.values(drivers)?.length / 20, 10)
+      ? Math.ceil(Object.values(drivers)?.length / 20)
       : 1,
   );
 
   const driversQuantity = useSelector(getQuantity);
-
-  const reloadPersistedDrivers = useCallback(() => {
-    if (typeof drivers === 'object') {
-      getDrivers(0, Object.values(drivers).length);
-    }
-  }, [drivers]);
 
   const loadMoreDrivers = useCallback(() => {
     if (driversQuantity > currentPage * 20) {
@@ -48,7 +41,7 @@ const Drivers = () => {
           data={Object.values(drivers)}
           renderItem={renderDriverCard}
           contentContainerStyle={styles.container}
-          keyExtractor={(item, index) => item.driverId.toString() + index}
+          keyExtractor={(item, index) => item.driverId}
           ListFooterComponent={View}
           ListFooterComponentStyle={styles.footer}
           onEndReached={loadMoreDrivers}
