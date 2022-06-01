@@ -1,6 +1,6 @@
 // SELECTORS
-export const getDriversSelector = (state) => state.drivers;
-export const getDriverById = (id) => (state) => getDriversSelector(state)[id];
+export const selectDrivers = (state) => state.drivers;
+export const getDriverById = (id) => (state) => selectDrivers(state)[id];
 export const getDriversByIds = (ids: string[]) => (state) =>
   ids.map((id) => getDriverById(id)(state));
 

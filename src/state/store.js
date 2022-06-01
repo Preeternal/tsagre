@@ -9,7 +9,7 @@ import {rootReducer} from '.';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: ['quantity'],
+  blacklist: ['quantity', 'drivers'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

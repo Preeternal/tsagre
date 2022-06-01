@@ -29,7 +29,7 @@ const Navigation = () => {
               headerCenter: () => <HeaderCenter>ergast</HeaderCenter>,
             },
           }),
-          headerHideShadow: true,
+          // headerHideShadow: true,
           contentStyle,
         })}
       />
