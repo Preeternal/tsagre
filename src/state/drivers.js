@@ -82,7 +82,7 @@ function* fetchDriversWorker({payload}) {
   try {
     const response = yield call(fetchDrivers, {
       offset: payload?.offset || 0,
-      limit: payload?.limit || 0,
+      limit: payload?.limit || 20,
     });
     yield put(driversLoadSuccess(response.data?.MRData));
   } catch (e) {
