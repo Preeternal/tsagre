@@ -25,7 +25,6 @@ export const DriverInfo = ({
   onPress,
 }) => {
   const driver = useSelector(selectDriverById(driverId));
-  console.log('driver', driver, constructor.id);
   const getWikiInfo = useCallback(() => {
     if (driver?.url) {
       Linking.openURL(driver?.url);
