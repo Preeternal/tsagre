@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 
 import {rootReducer} from '.';
-import mySaga from './sagas';
+import rootSaga from './sagas';
 
 const persistConfig = {
   key: 'root',
@@ -22,7 +22,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk, sagaMiddleware)),
 );
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
 

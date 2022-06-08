@@ -1,3 +1,6 @@
+import {call, put, takeEvery} from 'redux-saga/effects';
+import {fetchDrivers} from '../api';
+
 // SELECTORS
 export const selectDriversAllFields = (state) => state.drivers;
 export const selectDrivers = (state) => state.drivers.data;
@@ -9,11 +12,17 @@ export const getDriversByIds = (ids: string[]) => (state) =>
   ids.map((id) => selectDriverById(id)(state));
 
 // ACTION TYPES
+const DRIVERS_FETCH_REQUESTED = 'DRIVERS_FETCH_REQUESTED';
 const DRIVERS_LOAD_STARTED = 'DRIVERS_LOAD_STARTED';
 const DRIVERS_LOAD_SUCCESS = 'DRIVERS_LOAD_SUCCESS';
 const DRIVERS_LOAD_FAILURE = 'DRIVERS_LOAD_FAILURE';
 
 // ACTIONS
+export const getDrivers = (payload) => ({
+  type: DRIVERS_FETCH_REQUESTED,
+  payload,
+});
+
 export const driversLoadStarted = () => ({
   type: DRIVERS_LOAD_STARTED,
 });
@@ -65,3 +74,22 @@ export default (state = INITIAL_STATE, action: ACTION) => {
       return state;
   }
 };
+
+// worker Saga: will be fired on DRIVERS_FETCH_REQUESTED actions
+function* fetchDriversWorker({payload}) {
+  console.log('payload', payload);
+  yield put(driversLoadStarted());
+  try {
+    const response = yield call(fetchDrivers, {
+      offset: payload?.offset || 0,
+      limit: payload?.limit || 0,
+    });
+    yield put(driversLoadSuccess(response.data?.MRData));
+  } catch (e) {
+    yield put(driversLoadFailure(e.message));
+  }
+}
+
+export function* driversSaga() {
+  yield takeEvery(DRIVERS_FETCH_REQUESTED, fetchDriversWorker);
+}

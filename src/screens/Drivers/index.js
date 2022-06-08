@@ -3,7 +3,7 @@ import {FlatList, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
 import {Loader} from '../../components/common';
 
-import {getDrivers} from '../../state/thunks';
+import {getDrivers} from '../../state/drivers';
 import {selectDriversAllFields} from '../../state/drivers';
 
 import {DriverCard} from '../../components';
