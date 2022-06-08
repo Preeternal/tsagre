@@ -2,7 +2,7 @@ import React, {useCallback} from 'react';
 import {useSelector} from 'react-redux';
 import {Linking} from 'react-native';
 
-import {getDriverById} from '../../state/drivers';
+import {selectDriverById} from '../../state/drivers';
 
 import {
   Container,
@@ -24,7 +24,8 @@ export const DriverInfo = ({
   disabled = true,
   onPress,
 }) => {
-  const driver = useSelector(getDriverById(driverId));
+  const driver = useSelector(selectDriverById(driverId));
+  console.log('driver', driver, constructor.id);
   const getWikiInfo = useCallback(() => {
     if (driver?.url) {
       Linking.openURL(driver?.url);
