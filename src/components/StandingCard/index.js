@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, memo} from 'react';
 
 import {
   SeasonContainer,
@@ -11,7 +11,7 @@ import {
 import {Card} from '../common';
 import {DriverInfo} from '../DriverInfo';
 
-export const StandingCard = ({standing}) => {
+export const StandingCard = memo(({standing}) => {
   const driverStandings = standing.DriverStandings;
   return (
     <>
@@ -53,4 +53,4 @@ export const StandingCard = ({standing}) => {
         ))}
     </>
   );
-};
+});

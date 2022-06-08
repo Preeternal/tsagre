@@ -1,38 +1,39 @@
-import {store} from './store';
 import {fetchDrivers, fetchDriverStandings} from '../api';
-import {driversSet} from './drivers';
-import {quantitySet, getQuantity} from './quantity';
+import {
+  driversLoadStarted,
+  driversLoadSuccess,
+  driversLoadFailure,
+} from './drivers';
 
-import {standingSet} from './standings';
+import {
+  standingSet,
+  standingLoadStarted,
+  standingLoadFailure,
+} from './standings';
 
 // DRIVERS THUNK
-export const getDrivers = async (offset, limit) => {
-  const driversQuantity = getQuantity(store.getState());
+export const getDrivers = (offset = 0, limit = 20) => async (dispatch) => {
+  dispatch(driversLoadStarted());
   try {
-    const data = await fetchDrivers(offset, limit);
-    if (data.success) {
-      store.dispatch(driversSet(data.payload));
-      if (!driversQuantity) {
-        store.dispatch(quantitySet(data.quantity));
-      }
-    } else {
-      return Promise.reject(new Error(data.error));
-    }
+    const response = await fetchDrivers({offset, limit});
+    dispatch(driversLoadSuccess(response.data?.MRData));
   } catch (e) {
-    return Promise.reject(e);
+    console.log(e?.toJSON());
+    dispatch(driversLoadFailure(e?.message));
   }
 };
 
 // STANDING THUNK
-export const getStandings = async (id) => {
+export const getStandings = (id, props) => async (dispatch) => {
+  dispatch(standingLoadStarted(id));
   try {
-    const data = await fetchDriverStandings(id);
-    if (data.success) {
-      store.dispatch(standingSet(data.payload));
-    } else {
-      return Promise.reject(new Error(data.error));
-    }
+    const response = await fetchDriverStandings(id, {
+      offset: props?.offset || 0,
+      limit: props?.limit || 20,
+    });
+    dispatch(standingSet(response?.data?.MRData));
   } catch (e) {
-    return Promise.reject(e);
+    console.log(e?.toJSON());
+    dispatch(standingLoadFailure({id: id, error: e?.message}));
   }
 };

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar} from 'react-native';
 import 'react-native-gesture-handler';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {configureAxios} from './src/api/axiosConfig';
 
 import Navigation from './src/navigation';
 
@@ -18,6 +19,9 @@ const navigationTheme = {
 };
 
 const App = () => {
+  useEffect(() => {
+    configureAxios();
+  }, []);
   return (
     <SafeAreaProvider>
       <StatusBar

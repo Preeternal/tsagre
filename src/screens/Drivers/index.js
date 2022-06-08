@@ -1,54 +1,44 @@
-import React, {useEffect, useState, useCallback} from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import React, {useEffect, useCallback} from 'react';
+import {FlatList, StyleSheet} from 'react-native';
 import {useSelector} from 'react-redux';
+import {Loader} from '../../components/common';
 
 import {getDrivers} from '../../state/thunks';
-import {selectDrivers} from '../../state/drivers';
-import {getQuantity} from '../../state/quantity';
+import {selectDriversAllFields} from '../../state/drivers';
+
 import {DriverCard} from '../../components';
-import {Loader} from '../../components/common';
+import {useDispatch} from 'react-redux';
+
+const limit = 20;
 
 const renderDriverCard = ({item}) => <DriverCard driverId={item.driverId} />;
 
 const Drivers = () => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    getDrivers();
-  }, []);
+    dispatch(getDrivers());
+  }, [dispatch]);
 
-  const drivers = useSelector(selectDrivers);
-
-  const [currentPage, setCurrentPage] = useState(
-    Object.values(drivers)?.length
-      ? Math.ceil(Object.values(drivers)?.length / 20)
-      : 1,
+  const {loading, offset, total, data: drivers} = useSelector(
+    selectDriversAllFields,
   );
 
-  const driversQuantity = useSelector(getQuantity);
-
   const loadMoreDrivers = useCallback(() => {
-    if (driversQuantity > currentPage * 20) {
-      getDrivers(currentPage * 20);
-      setCurrentPage(currentPage + 1);
+    if (total > offset) {
+      dispatch(getDrivers(offset + limit, limit));
     }
-  }, [currentPage, driversQuantity]);
-
-  console.log(currentPage, Object.values(drivers).length);
+  }, [dispatch, offset, total]);
 
   return (
     <>
-      {typeof drivers === 'object' ? (
-        <FlatList
-          data={Object.values(drivers)}
-          renderItem={renderDriverCard}
-          contentContainerStyle={styles.container}
-          keyExtractor={(item, index) => item.driverId}
-          ListFooterComponent={View}
-          ListFooterComponentStyle={styles.footer}
-          onEndReached={loadMoreDrivers}
-        />
-      ) : (
-        <Loader />
-      )}
+      <FlatList
+        data={drivers}
+        renderItem={renderDriverCard}
+        contentContainerStyle={styles.container}
+        keyExtractor={(item, index) => item.driverId}
+        onEndReached={loadMoreDrivers}
+      />
+      {!!loading && <Loader />}
     </>
   );
 };
@@ -58,8 +48,6 @@ export {Drivers};
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-  },
-  footer: {
-    height: 10,
+    paddingBottom: 10,
   },
 });
