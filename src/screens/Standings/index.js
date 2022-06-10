@@ -28,10 +28,10 @@ export const Standings = ({route}) => {
   );
 
   const loadMoreDrivers = useCallback(() => {
-    if (total > offset) {
+    if (!loading && total > offset) {
       dispatch(getStandings(driverId, {offset: offset + limit, limit: limit}));
     }
-  }, [dispatch, driverId, offset, total]);
+  }, [dispatch, driverId, loading, offset, total]);
 
   return (
     <>
