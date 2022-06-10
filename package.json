@@ -24,10 +24,10 @@
     "qs": "^6.9.4",
     "react": "16.13.1",
     "react-native": "0.63.3",
-    "react-native-gesture-handler": "^1.8.0",
+    "react-native-gesture-handler": "1.8.0",
     "react-native-reanimated": "^1.13.1",
     "react-native-safe-area-context": "^3.1.8",
-    "react-native-screens": "^2.11.0",
+    "react-native-screens": "2.11.0",
     "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
@@ -44,6 +44,9 @@
     "jest": "^26.5.2",
     "metro-react-native-babel-preset": "^0.63.0",
     "react-test-renderer": "16.13.1"
+  },
+  "resolutions": {
+    "react-devtools-core": "4.14.0"
   },
   "jest": {
     "preset": "react-native"
