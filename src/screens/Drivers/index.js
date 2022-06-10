@@ -24,10 +24,10 @@ const Drivers = () => {
   );
 
   const loadMoreDrivers = useCallback(() => {
-    if (total > offset) {
+    if (!loading && total > offset) {
       dispatch(getDrivers({offset: offset + limit, limit: limit}));
     }
-  }, [dispatch, offset, total]);
+  }, [dispatch, loading, offset, total]);
 
   return (
     <>
